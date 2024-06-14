@@ -1,3 +1,3 @@
 # Team4
 Elizabeth Elliott-Solis
-Mel Lindberg
+; Mel Lindberg
