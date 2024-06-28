@@ -5,8 +5,20 @@
 
 # 2. Set up pygame for user interface
 #    - Game window, ask questions, options for users to answer
+pygame.init()
+game_window = pygame.display.set_mode((800, 600))
 #    - Have users press keys to submit answers seems simplest (A, B, C, D)
-
+def answer_input():
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_a]:
+        return 'A'
+    elif keys[pygame.K_b]:
+        return 'B'
+    elif keys[pygame.K_c]:
+        return 'C'
+    elif keys[pygame.K_d]:
+        return 'D'
+        
 # 2. Store answers (CSV)
 import csv
 def write_answer_file(filename, name, user_answers, class_answers):
@@ -25,5 +37,12 @@ def read_answer_file(filename):
             
 # 3. Compare them
 # 4. Display comparison to users
+# 5. Run the quiz
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
 
