@@ -1,3 +1,7 @@
+import pygame
+import sys
+import csv
+
 # 1. Set up pygame for user interface
 #    - Game window, ask questions, options for users to answer
 pygame.init()
@@ -15,7 +19,6 @@ def answer_input():
         return 'D'
         
 # 2. Store answers (CSV)
-import csv
 def write_answer_file(filename, name, user_answers, class_answers):
     class_answers.append([name] + user_answers)
     with open(filename, 'w', newline='') as csvfile:
