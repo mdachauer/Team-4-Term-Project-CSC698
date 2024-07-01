@@ -1,9 +1,4 @@
-# 1. Set up a web server
-#   - So everyone can take the quiz at the same time on their own computers
-#   - Try "Flask"
-#   - Will come back to this later ...
-
-# 2. Set up pygame for user interface
+# 1. Set up pygame for user interface
 #    - Game window, ask questions, options for users to answer
 pygame.init()
 game_window = pygame.display.set_mode((800, 600))
