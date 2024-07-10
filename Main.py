@@ -110,27 +110,54 @@ def display_question(screen, question, answer):
     for button in buttons:
         button.draw(screen)
     pygame.display.flip()
+    
+# Function to display the intro page:
+def display_intro_page(screen, name):
+    screen.fill(BLACK)
+    user_input_text = username_font.render("Please enter your name:", True, WHITE)
+    screen.blit(user_input_text, (WIDTH // 2 - user_input_text.get_width() // 2, HEIGHT // 2 -50))
+    user_input_box = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2, 200, 50)
+    pygame.draw.rect(screen, WHITE, user_input_box, 2)
+    name_text = username_font.render(name, True, WHITE)
+    screen.blit(name_text, (user_input_box.x +10, user_input_box.y +10))
+    instructions_text = username_font.render("Then, click anywhere to start!", True, WHITE)
+    screen.blit(instructions_text, (WIDTH // 2 - instructions_text.get_width() // 2, HEIGHT // 2 +100))
+    pygame.display.flip()
 
 # Main loop
 running = True
+intro_page = True
+name = ""
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if intro_page ==True:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    name = name[:-1]
+                else:
+                    name += event.unicode
+            elif event.type == pygame.MOUSEBUTTONDOWN and name:
+                intro_page = False
+        else:
+            for button in buttons:
+                if button.is_clicked(event):
+                    user_answers.append(button.text)
+                    current_question += 1
+                    if current_question >= len(questions):
+                        # End of questions
+                        name = "User"  # Placeholder for user name input
+                        write_answer_file('answers.csv', name, user_answers, class_answers)
+                        running = False
+                    break
+    
+    if intro_page == True:
+        display_intro_page(screen, name)
+    else:
+        if current_question < len(questions):
+            display_question(screen, questions[current_question], answers[current_question])
 
-        for button in buttons:
-            if button.is_clicked(event):
-                user_answers.append(button.text)
-                current_question += 1
-                if current_question >= len(questions):
-                    # End of questions
-                    name = "User"  # Placeholder for user name input
-                    write_answer_file('answers.csv', name, user_answers, class_answers)
-                    running = False
-                break
-
-    if current_question < len(questions):
-        display_question(screen, questions[current_question], answers[current_question])
 
 pygame.quit()
 sys.exit()
