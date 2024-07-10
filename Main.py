@@ -147,7 +147,7 @@ while running:
                     current_question += 1
                     if current_question >= len(questions):
                         # End of questions
-                        name = "User"  # Placeholder for user name input
+                        name = name  
                         write_answer_file('answers.csv', name, user_answers, class_answers)
                         running = False
                     break
