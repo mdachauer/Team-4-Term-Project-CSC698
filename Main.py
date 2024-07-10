@@ -30,6 +30,7 @@ GREEN = (0, 255, 0)
 question_font = pygame.font.Font(None, 36)
 answer_font_button = pygame.font.Font(None, 36)
 answer_font_options = pygame.font.Font(None, 30)
+username_font = pygame.font.Font(None, 36)
 
 # Sample Questions
 questions = [
