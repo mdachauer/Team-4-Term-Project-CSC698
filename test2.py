@@ -36,12 +36,26 @@ questions = [
     "What age do you prefer to hang out with?",
     "After school, you usually...",
     "You spent most of last summer...",
+#    "Procrastination is:",
+ #   "Does Pineapple belong on pizza?",
+ #   "You need to improve your:",
+#    "Public speaking:",
+#    "What are your plans after graduation? ",
+#    "Would you get a tattoo?",
+#    "Most of your homework gets done: ",
 ]
 
 answers = [
     "A) Doesn't Matter   B) Same age as me   C) Older than Me   D) Younger than me",
     "A) Work             B) Sleep            C) Study           D) Hang out with friends",
     "A) Hanging out at home   B) Traveling    C) At school    D) Working",
+#    "A) something everyone does B) everyone does it but me   C)  a quality I'm proud of    D) Gets me in trouble with assignments ",
+#    "A) Yes  B) No",
+#    "A) grades   B) timing / organization   C) clothes    D) play list",
+ #   "A) Not for me     B) Makes me nauseous    C) I can do it, if in a group    D) Bring it on - I love to talk ",
+ #   "A) college or university   B) trade school    C) military     D) undecided",
+#    "A) maybe   B) yes my appointment is booked   C) been there done that    D) only temporary ones",
+ #   "A) as soon as I get home   B) sometime after dinner    C) just before I fall asleep     D) With my friends",
 ]
 
 # Current question index
@@ -134,6 +148,9 @@ def display_intro_page(screen, name):
 
 
 # Function to read student answers from CSV
+from collections import defaultdict
+import csv
+
 def read_student_answers_from_csv(file_path):
     students = []
     with open(file_path, 'r') as csvfile:
@@ -141,32 +158,77 @@ def read_student_answers_from_csv(file_path):
         for row in reader:
             students.append({
                 "name": row["name"],
-                "answers": [row[f"Q{i + 1}"] for i in range(len(questions))]  # Adjust to match question columns
+                "answers": [row[f"Q{i + 1}"] for i in range(3)]  # Adjust to match question columns
             })
     return students
 
-
-# Calculate similarity score
 def calculate_similarity_score(student1, student2):
-    return sum([1 for a, b in zip(student1["answers"], student2["answers"]) if a == b])
+    return sum(1 for a, b in zip(student1["answers"], student2["answers"]) if a == b)
 
-
-# Find matches
 def find_top_matches(students, N=5):
     similarity_scores = defaultdict(dict)
     for i in range(len(students)):
         for j in range(i + 1, len(students)):
             similarity_score = calculate_similarity_score(students[i], students[j])
-            similarity_scores[students[i]["name"]][students[j]["name"]] = similarity_score
-            similarity_scores[students[j]["name"]][students[i]["name"]] = similarity_score
+            # Calculate the match percentage
+            match_percentage = (similarity_score / len(students[i]["answers"])) * 100
+            similarity_scores[students[i]["name"]][students[j]["name"]] = match_percentage
+            similarity_scores[students[j]["name"]][students[i]["name"]] = match_percentage
 
     top_matches = {}
     for student in students:
+        # Sort the matches by percentage and get the top N matches
         sorted_matches = sorted(similarity_scores[student["name"]].items(), key=lambda x: x[1], reverse=True)
-        top_matches[student["name"]] = [match[0] for match in sorted_matches[:N]]
+        top_matches[student["name"]] = sorted_matches[:N]
 
     return top_matches
 
+def format_output(top_matches):
+    for name, matches in top_matches.items():
+        output = f"Hi {name}, thanks for taking the survey.\nHere are your top matches:\n"
+        for i, (match_name, percentage) in enumerate(matches, start=1):
+            output += f"{i}. {match_name} {int(percentage)}% of matches\n"
+        print(output)
+
+# Example usage
+file_path = 'answers.csv'
+students = read_student_answers_from_csv(file_path)
+top_matches = find_top_matches(students)
+format_output(top_matches)
+
+#def read_student_answers_from_csv(file_path):
+#    students = []
+#    with open(file_path, 'r') as csvfile:
+#        reader = csv.DictReader(csvfile)
+#        for row in reader:
+#            students.append({
+#                "name": row["name"],
+#                "answers": [row[f"Q{i + 1}"] for i in range(len(questions))]  # Adjust to match question columns
+#            })
+#    return students
+
+
+# Calculate similarity score
+#def calculate_similarity_score(student1, student2):
+#    return sum([1 for a, b in zip(student1["answers"], student2["answers"]) if a == b])
+
+
+# Find matches
+#def find_top_matches(students, N=5):
+#    similarity_scores = defaultdict(dict)
+#    for i in range(len(students)):
+#        for j in range(i + 1, len(students)):
+#            similarity_score = calculate_similarity_score(students[i], students[j])
+ #           similarity_scores[students[i]["name"]][students[j]["name"]] = similarity_score
+#            similarity_scores[students[j]["name"]][students[i]["name"]] = similarity_score
+
+#    top_matches = {}
+#    for student in students:
+#        sorted_matches = sorted(similarity_scores[student["name"]].items(), key=lambda x: x[1], reverse=True)
+#        top_matches[student["name"]] = [match[0] for match in sorted_matches[:N]]
+
+#    return top_matches
+#TEST COMMENT 231
 
 # Main loop
 running = True
