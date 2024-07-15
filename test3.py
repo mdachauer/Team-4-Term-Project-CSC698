@@ -36,12 +36,29 @@ questions = [
     "What age do you prefer to hang out with?",
     "After school, you usually...",
     "You spent most of last summer...",
+    "Procrastination is:",
+    "Does Pineapple belong on pizza?",
+    "You need to improve your:",
+    "Public speaking:",
+    "What are your plans after graduation? ",
+    "Would you get a tattoo?",
+    "Most of your homework gets done: ",
 ]
 
 answers = [
     "A) Doesn't Matter   B) Same age as me   C) Older than Me   D) Younger than me",
     "A) Work             B) Sleep            C) Study           D) Hang out with friends",
     "A) Hanging out at home   B) Traveling    C) At school    D) Working",
+    "A) something everyone does B) everyone does it but me   "
+    "C)  a quality I'm proud of    D) Gets me in trouble with assignments ",
+    "A) Yes  B) No",
+    "A) grades   B) timing / organization   C) clothes    D) play list",
+    "A) Not for me     B) Makes me nauseous    C) I can do it, if in a group   "
+    " D) Bring it on - I love to talk ",
+    "A) college or university   B) trade school    C) military     D) undecided",
+    "A) maybe   B) yes my appointment is booked   C) been there done that    D) only temporary ones",
+    "A) as soon as I get home   B) sometime after dinner    "
+    "C) just before I fall asleep     D) With my friends",
 ]
 
 # Current question index
