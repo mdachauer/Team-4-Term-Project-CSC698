@@ -1,9 +1,9 @@
-import pygame
-import sys
 import csv
 import os
-import random
+import sys
 from collections import defaultdict
+
+import pygame
 
 # Initialize Pygame
 pygame.init()
@@ -30,6 +30,24 @@ question_font = pygame.font.Font(None, 36)
 answer_font_button = pygame.font.Font(None, 36)
 answer_font_options = pygame.font.Font(None, 30)
 username_font = pygame.font.Font(None, 36)
+
+#New this may work to split the answer text into lines based on the number of characters.
+def split_text(text, max_length=25):
+    words = text.split()
+    lines = []
+    current_line = ""
+    for word in words:
+        if len(current_line) + len(word) + 1 <= max_length:
+            current_line += word + " "
+        else:
+            lines.append(current_line.strip())
+            current_line = word + " "
+
+    if current_line:
+        lines.append(current_line.strip())
+
+    return "\n".join(lines)
+
 
 # Sample Questions
 questions = [
@@ -61,6 +79,8 @@ answers = [
     "C) just before I fall asleep     D) With my friends",
 ]
 
+#Call function to split text
+formatted_answers = [split_text(answer) for answer in answers]
 # Current question index
 current_question = 0
 
@@ -125,10 +145,10 @@ buttons = [
 
 
 # Function to display the current question
+# Do I need to change the reference from answer_text to formatted_answers
 def display_question(screen, question, answer):
     screen.fill(BLACK)
     question_text = question_font.render(question, True, WHITE)
-    answer_text = answer_font_options.render(answer, True, WHITE)
     screen.blit(question_text, (WIDTH // 2 - question_text.get_width() // 2, 150))
     screen.blit(answer_text, (WIDTH // 2 - answer_text.get_width() // 2, 200))
     for button in buttons:

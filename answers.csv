@@ -1,18 +1,21 @@
-name,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9
-Bill,B,C,D,D,A,C,A,D,A
-"Sean",C,B,A,A,B,B,B,A,A
-Lisa,D,C,B,B,A,C,C,B,A
-Sam,C,B,A,A,B,B,D,A,A
-Mike,A,B,C,C,B,B,A,C,B
-Kevin,A,B,C,C,B,B,B,C,B
-Joel,C,B,A,A,B,B,C,A,B
-Peter,A,B,D,D,B,B,D,D,B
-Jon,A,C,B,B,A,C,A,B,C
-Andy,B,C,D,D,A,C,B,D,C
-Michele,B,C,D,D,A,C,C,D,C
-Jose,A,C,D,D,A,C,D,D,C
-Elizabeth,A,A,D,D,B,A,A,D,C
-Jen,C,D,B,B,A,D,B,B,D
-Daisy,B,A,A,A,B,A,C,A,D
-Blanc,A,B,C,C,A,B,D,C,D
-Jack,C,B,A,A,A,B,A,A,D
+name,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10
+Bill	B	C	D
+"Sean
+	C	B	A"
+Lisa	D	C	B
+Sam	C	B	A
+Mike	A	B	C
+Kevin	A	B	C
+Joel	C	B	A
+Peter	A	B	D
+Jon	A	C	B
+Andy	B	C	D
+Michele	B	C	D
+Jose	A	C	D
+Elizabeth	A	A	D
+Jen	C	D	B
+Daisy	B	A	A
+Blanc	A	B	C
+Jack	C	B	A
+Jesus,A,A,A,A,A,A,A,A,A,A
+Jesus,A,A,A,A,A,A,A,A,A,A
