@@ -32,21 +32,21 @@ answer_font_options = pygame.font.Font(None, 30)
 username_font = pygame.font.Font(None, 36)
 
 #New this may work to split the answer text into lines based on the number of characters.
-def split_text(text, max_length=25):
-    words = text.split()
+def split_text(text, Font,  max_width):
+    words = text.split(' ')
     lines = []
     current_line = ""
     for word in words:
-        if len(current_line) + len(word) + 1 <= max_length:
-            current_line += word + " "
+        test_line = current_line + word + ' '
+        if Font.size(test_line)[0]<= max_width:
+            current_line = test_line
         else:
             lines.append(current_line.strip())
             current_line = word + " "
 
-    if current_line:
-        lines.append(current_line.strip())
+    lines.append(current_line.strip())
 
-    return "\n".join(lines)
+    return lines
 
 
 # Sample Questions
@@ -80,7 +80,7 @@ answers = [
 ]
 
 #Call function to split text
-formatted_answers = [split_text(answer) for answer in answers]
+formatted_answers = [split_text(answer, answer_font_options, WIDTH - 40) for answer in answers]
 # Current question index
 current_question = 0
 
@@ -146,11 +146,15 @@ buttons = [
 
 # Function to display the current question
 # Do I need to change the reference from answer_text to formatted_answers
-def display_question(screen, question, answer):
+def display_question(screen, question, answer_lines):
     screen.fill(BLACK)
     question_text = question_font.render(question, True, WHITE)
-    screen.blit(question_text, (WIDTH // 2 - question_text.get_width() // 2, 150))
-    screen.blit(answer_text, (WIDTH // 2 - answer_text.get_width() // 2, 200))
+    screen.blit(question_text, (WIDTH // 2 - question_text.get_width() // 2, 50))
+    y_offset=150
+    for line in answer_lines:
+        answer_text = answer_font_options.render(line, True, WHITE)
+        screen.blit(answer_text, (WIDTH // 2 - answer_text.get_width() // 2, y_offset))
+        y_offset += 30
     for button in buttons:
         button.draw(screen)
     pygame.display.flip()
@@ -248,7 +252,7 @@ while running:
         display_intro_page(screen, name)
     elif not survey_complete:
         if current_question < len(questions):
-            display_question(screen, questions[current_question], answers[current_question])
+            display_question(screen, questions[current_question], formatted_answers[current_question])
     else:
         display_matches(screen, matches)
 
