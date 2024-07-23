@@ -172,7 +172,13 @@ def display_intro_page(screen, name):
     instructions_text = username_font.render("Then, click anywhere to start!", True, WHITE)
     screen.blit(instructions_text, (WIDTH // 2 - instructions_text.get_width() // 2, HEIGHT // 2 + 100))
     pygame.display.flip()
-
+    
+# Function to display the splash page:
+def display_splash_page(screen):
+    screen.fill(WHITE)
+    splash_image = pygame.image.load('Friend Finder.png')
+    screen.blit(splash_image,(WIDTH // 2 - splash_image.get_width() // 2, HEIGHT // 2 - splash_image.get_height() //2))
+    pygame.display.flip()
 
 # Function to read student answers from CSV
 def read_student_answers_from_csv(file_path):
@@ -223,6 +229,8 @@ running = True
 intro_page = True
 name = ""
 survey_complete = False
+display_splash_page(screen)
+pygame.time.wait(4000)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
