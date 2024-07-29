@@ -221,6 +221,8 @@ def display_matches(screen, matches):
         match_text = question_font.render(f"{i}. {match_name}: {percentage:.2f}% match", True, WHITE)
         screen.blit(match_text, (50, y_offset))
         y_offset += 40
+    thanks = username_font.render('Thanks for playing!', True, WHITE)
+    screen.blit(thanks, (WIDTH // 2 - thanks.get_width() // 2, HEIGHT - match_text.get_width()))
     pygame.display.flip()
 
 
