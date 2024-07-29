@@ -230,12 +230,18 @@ intro_page = True
 name = ""
 survey_complete = False
 display_splash_page(screen)
-pygame.time.wait(4000)
+pygame.time.set_timer(pygame.USEREVENT,4000)
+splash_display = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if intro_page:
+        if splash_display:
+            if event.type == pygame.USEREVENT:
+                splash_display = False
+                pygame.time.set_timer(pygame.USEREVENT,0)
+
+        elif intro_page:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                     name = name[:-1]
@@ -255,8 +261,9 @@ while running:
                         matches = find_top_matches(students, name)
                         survey_complete = True
                     break
-
-    if intro_page:
+    if splash_display:
+        display_splash_page(screen)
+    elif intro_page:
         display_intro_page(screen, name)
     elif not survey_complete:
         if current_question < len(questions):
