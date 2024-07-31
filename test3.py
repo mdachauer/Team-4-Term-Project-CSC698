@@ -26,9 +26,9 @@ YELLOW = (255, 255, 100)
 GREEN = (0, 255, 0)
 
 # Fonts
-question_font = pygame.font.Font(None, 36)
+question_font = pygame.font.Font(None, 40)
 answer_font_button = pygame.font.Font(None, 36)
-answer_font_options = pygame.font.Font(None, 30)
+answer_font_options = pygame.font.Font(None, 40)
 username_font = pygame.font.Font(None, 36)
 
 #New this may work to split the answer text into lines based on the number of characters.
@@ -137,22 +137,23 @@ class Button:
 
 # Create buttons for answers
 buttons = [
-    Button("A", (150, 300), 100, 50, RED),
-    Button("B", (300, 300), 100, 50, YELLOW),
-    Button("C", (450, 300), 100, 50, GREEN),
-    Button("D", (600, 300), 100, 50, CYAN),
+    Button("A", (150, 400), 100, 50, RED),
+    Button("B", (300, 400), 100, 50, YELLOW),
+    Button("C", (450, 400), 100, 50, GREEN),
+    Button("D", (600, 400), 100, 50, CYAN),
 ]
 
 
 # Function to display the current question
 # Do I need to change the reference from answer_text to formatted_answers
 def display_question(screen, question, answer_lines):
-    screen.fill(BLACK)
-    question_text = question_font.render(question, True, WHITE)
-    screen.blit(question_text, (WIDTH // 2 - question_text.get_width() // 2, 50))
-    y_offset=150
+    question_background = pygame.image.load('Question Background.png')
+    screen.blit(question_background, question_background.get_rect())
+    question_text = question_font.render(question, True, BLACK)
+    screen.blit(question_text, (WIDTH // 2 - question_text.get_width() // 2, 150))
+    y_offset=250
     for line in answer_lines:
-        answer_text = answer_font_options.render(line, True, WHITE)
+        answer_text = answer_font_options.render(line, True, BLACK)
         screen.blit(answer_text, (WIDTH // 2 - answer_text.get_width() // 2, y_offset))
         y_offset += 30
     for button in buttons:
