@@ -213,15 +213,16 @@ def find_top_matches(students, current_student_name, N=5):
 
 
 def display_matches(screen, matches):
-    screen.fill(BLACK)
+    dot_matrix_image = pygame.image.load('Dot Matrix Paper.png')
+    screen.blit(dot_matrix_image, dot_matrix_image.get_rect())
     y_offset = 50
-    title = username_font.render("Your Top Matches", True, WHITE)
+    title = username_font.render("Your Top Matches", True, BLACK)
     screen.blit(title, (WIDTH // 2 - title.get_width() // 2, 10))
     for i, (match_name, percentage) in enumerate(matches, start=1):
-        match_text = question_font.render(f"{i}. {match_name}: {percentage:.2f}% match", True, WHITE)
+        match_text = question_font.render(f"{i}. {match_name}: {percentage:.2f}% match", True, BLACK)
         screen.blit(match_text, (50, y_offset))
         y_offset += 40
-    thanks = username_font.render('Thanks for playing!', True, WHITE)
+    thanks = username_font.render('Thanks for playing!', True, BLACK)
     screen.blit(thanks, (WIDTH // 2 - thanks.get_width() // 2, HEIGHT - match_text.get_width()))
     pygame.display.flip()
 
