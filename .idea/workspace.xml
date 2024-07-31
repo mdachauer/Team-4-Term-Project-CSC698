@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e1b6bd1-a441-4fac-bba5-920956d19c7c" name="Changes" comment="Adding all questions and answers.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_16_24,_6_43 PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_16_24__6_43PM__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/pineapple_friend.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pizza_friend.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/answers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/answers.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test3.py" beforeDir="false" afterPath="$PROJECT_DIR$/test3.py" afterDir="false" />

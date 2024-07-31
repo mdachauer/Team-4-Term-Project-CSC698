@@ -78,6 +78,19 @@ answers = [
     "A) as soon as I get home   B) sometime after dinner    "
     "C) just before I fall asleep     D) With my friends",
 ]
+#Sprites on questions
+pizza = pygame.sprite.Sprite()  #Create the first sprite
+pizza.image = pygame.image.load('Pizza_Friend.png')  #Load the image
+pizza_X = 400  #Set X coordinate
+pizza_Y = 1  #Set Y coordinate
+
+pineapple = pygame.sprite.Sprite()  #Create the first sprite
+pineapple.image = pygame.image.load('Pineapple_Friend.png')  #Load the image
+pineapple_X = 10  #Set X coordinate
+pineapple_Y = 10  #Set Y coordinate
+
+screen.blit(pineapple.image, (pineapple_X, pineapple_Y))  #Draw the first sprite
+screen.blit(pizza.image, (pizza_X, pizza_Y))
 
 #Call function to split text
 formatted_answers = [split_text(answer, answer_font_options, WIDTH - 40) for answer in answers]
@@ -158,6 +171,9 @@ def display_question(screen, question, answer_lines):
         y_offset += 30
     for button in buttons:
         button.draw(screen)
+
+    screen.blit(pineapple.image, (pineapple_X, pineapple_Y))  #Draw the first sprite
+    screen.blit(pizza.image, (pizza_X, pizza_Y))
     pygame.display.flip()
 
 
