@@ -2,6 +2,7 @@ import csv
 import os
 import sys
 from collections import defaultdict
+import math
 
 import pygame
 
@@ -80,17 +81,15 @@ answers = [
 ]
 #Sprites on questions
 pizza = pygame.sprite.Sprite()  #Create the first sprite
-pizza.image = pygame.image.load('Pizza_Friend.png')  #Load the image
+pizza_image = pygame.image.load('Pizza_Friend.png')  #Load the image
 pizza_X = 400  #Set X coordinate
 pizza_Y = 1  #Set Y coordinate
 
-pineapple = pygame.sprite.Sprite()  #Create the first sprite
-pineapple.image = pygame.image.load('Pineapple_Friend.png')  #Load the image
+pineapple = pygame.sprite.Sprite()  #Create the second sprite
+pineapple_image = pygame.image.load('Pineapple_Friend.png')  #Load the image
 pineapple_X = 10  #Set X coordinate
 pineapple_Y = 10  #Set Y coordinate
 
-screen.blit(pineapple.image, (pineapple_X, pineapple_Y))  #Draw the first sprite
-screen.blit(pizza.image, (pizza_X, pizza_Y))
 
 #Call function to split text
 formatted_answers = [split_text(answer, answer_font_options, WIDTH - 40) for answer in answers]
@@ -156,25 +155,53 @@ buttons = [
     Button("D", (600, 400), 100, 50, CYAN),
 ]
 
+# Function to rotate and blit a sprite
+def rotate_sprite(image, angle, pos_x, pos_y):
+    rotated_image = pygame.transform.rotate(image, angle)
+    new_rect = rotated_image.get_rect(center=image.get_rect(topleft=(pos_x, pos_y)).center)
+    screen.blit(rotated_image, new_rect.topleft)
+    return rotated_image
 
 # Function to display the current question
 # Do I need to change the reference from answer_text to formatted_answers
-def display_question(screen, question, answer_lines):
+def display_question(screen, question, answer_lines, question_num, pos_index):
     question_background = pygame.image.load('Question Background.png')
     screen.blit(question_background, question_background.get_rect())
     question_text = question_font.render(question, True, BLACK)
     screen.blit(question_text, (WIDTH // 2 - question_text.get_width() // 2, 150))
-    y_offset=250
+    y_offset = 250
+
+    # Call Global variable
+    global pineapple_image
+    global pizza_image
+
     for line in answer_lines:
         answer_text = answer_font_options.render(line, True, BLACK)
         screen.blit(answer_text, (WIDTH // 2 - answer_text.get_width() // 2, y_offset))
         y_offset += 30
+
     for button in buttons:
         button.draw(screen)
 
-    screen.blit(pineapple.image, (pineapple_X, pineapple_Y))  #Draw the first sprite
-    screen.blit(pizza.image, (pizza_X, pizza_Y))
+    screen.blit(pineapple_image, (pineapple_X, pineapple_Y))  # Draw the first sprite
+    screen.blit(pizza_image, (pizza_X, pizza_Y)) # Draw the second sprite
     pygame.display.flip()
+
+    # Calculate angle based on the current question number
+    angle = (question_num * 36) % 360  # Rotate 36 deg per question
+
+    # Calculate new positions for sprites based on q number
+    positions = [
+        (0, 0),
+        (WIDTH - pineapple_image.get_width(), 0),
+        (WIDTH - pineapple_image.get_width(), HEIGHT - pineapple_image.get_height()),
+        (0, HEIGHT - pineapple_image.get_height())
+    ]
+
+# Rotate and blit the sprites
+    pineapple_image = rotate_sprite(pineapple_image, angle, *positions[pos_index % len(positions)])
+    pizza_image = rotate_sprite(pizza_image, angle, *positions[(pos_index + 2) % len(positions)])
+
 
 
 # Function to display the intro page:
@@ -252,6 +279,8 @@ survey_complete = False
 display_splash_page(screen)
 pygame.time.set_timer(pygame.USEREVENT,4000)
 splash_display = True
+question_num = 0
+pos_index = 2
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -287,7 +316,7 @@ while running:
         display_intro_page(screen, name)
     elif not survey_complete:
         if current_question < len(questions):
-            display_question(screen, questions[current_question], formatted_answers[current_question])
+            display_question(screen, questions[current_question], formatted_answers[current_question], question_num + 1, pos_index)
     else:
         display_matches(screen, matches)
 
