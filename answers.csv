@@ -1,34 +1,12 @@
-name,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10
-Bill	B	C	D
-"Sean
-	C	B	A"
-Lisa	D	C	B
-Sam	C	B	A
-Mike	A	B	C
-Kevin	A	B	C
-Joel	C	B	A
-Peter	A	B	D
-Jon	A	C	B
-Andy	B	C	D
-Michele	B	C	D
-Jose	A	C	D
-Elizabeth	A	A	D
-Jen	C	D	B
-Daisy	B	A	A
-Blanc	A	B	C
-Jack	C	B	A
-Jesus,A,A,A,A,A,A,A,A,A,A
-Jesus,A,A,A,A,A,A,A,A,A,A
-Paul,B,C,C,C,C,D,D,D,D,D
-Pete,B,C,D,D,D,D,D,D,D,D
-Matt,C,B,A,D,D,B,A,A,A,A
-Peter,A,A,A,A,A,A,A,A,A,A
-Pete,A,B,A,B,B,D,B,A,C,B
-Totoro,D,D,C,B,A,B,C,D,D,C
-Sarah,A,B,C,D,B,A,B,B,B,C
-Mic,A,A,A,A,A,A,A,A,A,A
-Elizabeth,A,B,C,D,C,B,A,B,C,D
-Tan,D,D,C,D,A,D,D,B,A,B
-Joel,A,A,A,A,A,A,A,A,A,A
-Bill,A,C,D,C,B,A,D,C,B,A
-Xero,A,B,A,C,D,D,D,D,C,D
+﻿name,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10
+Elizabeth,A,A,C,A,A,B,D,D,A,D
+Adam,C,B,B,A,A,D,C,A,C,C
+Tanishq,A,A,D,A,B,B,C,A,A,B
+Brandon,A,B,D,D,A,B,B,A,B,C
+Diego,B,D,B,A,A,B,D,A,A,B
+Aaron,A,A,D,B,A,C,A,D,D,A
+Judith,B,C,B,D,B,B,D,D,D,B
+Genelle,A,D,D,A,A,D,C,A,A,B
+Tea,B,B,B,D,A,C,C,A,D,A
+Hasan,C,C,D,D,B,B,C,A,D,B
+Miyase,B,D,B,A,B,B,A,A,A,B
