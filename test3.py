@@ -160,10 +160,9 @@ def rotate_sprite(image, angle, pos_x, pos_y):
     rotated_image = pygame.transform.rotate(image, angle)
     new_rect = rotated_image.get_rect(center=image.get_rect(topleft=(pos_x, pos_y)).center)
     screen.blit(rotated_image, new_rect.topleft)
-    return rotated_image
+    #return rotated_image
 
 # Function to display the current question
-# Do I need to change the reference from answer_text to formatted_answers
 def display_question(screen, question, answer_lines, question_num, pos_index):
     question_background = pygame.image.load('Question Background.png')
     screen.blit(question_background, question_background.get_rect())
@@ -172,8 +171,8 @@ def display_question(screen, question, answer_lines, question_num, pos_index):
     y_offset = 250
 
     # Call Global variable
-    global pineapple_image
-    global pizza_image
+    #global pineapple_image
+    #global pizza_image
 
     for line in answer_lines:
         answer_text = answer_font_options.render(line, True, BLACK)
@@ -183,25 +182,25 @@ def display_question(screen, question, answer_lines, question_num, pos_index):
     for button in buttons:
         button.draw(screen)
 
-    screen.blit(pineapple_image, (pineapple_X, pineapple_Y))  # Draw the first sprite
-    screen.blit(pizza_image, (pizza_X, pizza_Y)) # Draw the second sprite
-    pygame.display.flip()
+    #screen.blit(pineapple_image)  # Draw the first sprite
+    #screen.blit(pizza_image) # Draw the second sprite
+    #pygame.display.flip()
 
     # Calculate angle based on the current question number
-    angle = (question_num * 36) % 360  # Rotate 36 deg per question
+    angle = (current_question * 36) % 360  # Rotate 36 deg per question
 
     # Calculate new positions for sprites based on q number
-    positions = [
-        (0, 0),
-        (WIDTH - pineapple_image.get_width(), 0),
-        (WIDTH - pineapple_image.get_width(), HEIGHT - pineapple_image.get_height()),
-        (0, HEIGHT - pineapple_image.get_height())
-    ]
+    #positions = [
+    #    (0, 0),
+     #   (WIDTH - pineapple_image.get_width(), 0),
+      #  (WIDTH - pineapple_image.get_width(), HEIGHT - pineapple_image.get_height()),
+      #  (0, HEIGHT - pineapple_image.get_height())
+    #]
 
 # Rotate and blit the sprites
-    pineapple_image = rotate_sprite(pineapple_image, angle, *positions[pos_index % len(positions)])
-    pizza_image = rotate_sprite(pizza_image, angle, *positions[(pos_index + 2) % len(positions)])
-
+    rotate_sprite(pineapple_image, angle, WIDTH//2-300,HEIGHT//12)
+    rotate_sprite(pizza_image, angle, WIDTH//2+300,HEIGHT//12)
+    pygame.display.flip()
 
 
 # Function to display the intro page:
