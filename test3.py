@@ -223,6 +223,15 @@ def display_splash_page(screen):
     screen.blit(splash_image,(WIDTH // 2 - splash_image.get_width() // 2, HEIGHT // 2 - splash_image.get_height() //2))
     pygame.display.flip()
 
+# Function to display end credits page:
+def display_end_credits(screen):
+    screen.fill(MAGENTA)  # Fill the screen with pink color to match color theme of splash page
+    end_credits_image = pygame.image.load('credits 800 x 600.png')  # Load the end credits image
+    # Center the image on the screen
+    screen.blit(end_credits_image, (WIDTH // 2 - end_credits_image.get_width() // 2, HEIGHT // 2 - end_credits_image.get_height() // 2))
+    pygame.display.flip()
+    pygame.time.delay(5000)  # Display for 5 seconds
+    
 # Function to read student answers from CSV
 def read_student_answers_from_csv(file_path):
     students = []
@@ -267,6 +276,8 @@ def display_matches(screen, matches):
         y_offset += 40
     thanks = username_font.render('Thanks for playing!', True, BLACK)
     screen.blit(thanks, (WIDTH // 2 - thanks.get_width() // 2, HEIGHT - match_text.get_width()))
+    click = username_font.render('[Click anywhere when done]', True, BLACK)
+    screen.blit(click, (WIDTH // 2 - click.get_width() // 2, 400))
     pygame.display.flip()
 
 
@@ -275,6 +286,7 @@ running = True
 intro_page = True
 name = ""
 survey_complete = False
+matches_displayed = False
 display_splash_page(screen)
 pygame.time.set_timer(pygame.USEREVENT,4000)
 splash_display = True
@@ -316,8 +328,14 @@ while running:
     elif not survey_complete:
         if current_question < len(questions):
             display_question(screen, questions[current_question], formatted_answers[current_question], question_num + 1, pos_index)
-    else:
+    elif survey_complete and not matches_displayed:
         display_matches(screen, matches)
+        pygame.time.delay(4000)
+        matches_displayed = True
+    elif matches_displayed:
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            display_end_credits(screen)
+
 
 pygame.quit()
 sys.exit()
